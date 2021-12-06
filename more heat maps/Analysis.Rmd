@@ -1,0 +1,116 @@
+---
+title: "BMEG 372 - Project Group Work"
+author: "Sam Freeman"
+date: "11/12/2020"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Layperson & ODL Kit Distribution Data (continuous heatmap)
+
+## Importing Data
+
+```{r chunk3}
+library(readxl)
+#layperson_data <- read_excel("/Users/sam/Documents/Temp School/BMEG 372/Group Work/chopped data/Layperson Naloxone Distribution/2020 Layperson Naloxone/2020_Layperson_Distribution_Formstack_feb-nov-2020.xlsx")
+odl_data <- read_excel("/Users/sam/Documents/Temp School/BMEG 372/Group Work/chopped data/Layperson Naloxone Distribution/2020 Layperson Naloxone/2020_ODL_Naloxone_Formstack_May-June_2020.xlsx")
+library(tidyr)
+#layperson_df <- data.frame(coords = layperson_data$Location)
+df <- data.frame(coords = odl_data$Location) #change to odl_df
+#df <- rbind(layperson_df, odl_df)
+df <- separate(data=df, col = coords, into = c("lon", "lat"), sep = "\\,")
+df$lon <- as.numeric(df$lon)
+df$lat <- as.numeric(df$lat)
+```
+
+### Modified from https://axelhodler.medium.com/creating-a-heat-map-from-coordinates-using-r-780db4901075
+```{r chunk4}
+library(ggplot2)
+library(ggmap)
+library(RColorBrewer)
+map_bounds <- c(left = -95, bottom = 35, right = -80.00, top = 45)
+dist_coords.map <- get_stamenmap(map_bounds, zoom = 8, maptype = "toner-lite")
+dist_coords.map <- ggmap(dist_coords.map, extent="device", legend="none")
+dist_coords.map <- dist_coords.map + stat_density2d(data=df, aes(x=lat, y=lon, fill=..level.., alpha=..level..), geom="polygon")
+dist_coords.map <- dist_coords.map + scale_fill_gradientn(colours=rev(brewer.pal(7, "Spectral"))) #for coloured gradient
+#dist_coords.map <- dist_coords.map + scale_fill_gradientn(colours="green")
+dist_coords.map <- dist_coords.map + theme_bw()
+plot(dist_coords.map)
+```
+
+# First Responder and ISDH Naloxone Incident Reports (continuous heatmap)
+
+## Importing Data
+
+```{r chunk5}
+library(readxl)
+FR_data <- read_excel("/Users/sam/Documents/Temp School/BMEG 372/Group Work/chopped data/01-Formstack Incident Reports/First_Responder_Reporting_2016-2020_Formstack.xlsx")
+library(tidyr)
+FR_df <- data.frame(coords = FR_data$Location, count = FR_data$`Number instances naloxone used`)
+ISDH_data <- read_excel("/Users/sam/Documents/Temp School/BMEG 372/Group Work/chopped data/01-Formstack Incident Reports/ISDH_FirstResponde_Grant_Reporting_Formstack.xlsx")
+ISDH_df <- data.frame(coords = ISDH_data$Location, count = ISDH_data$`Number instances naloxone used`)
+df <- rbind(FR_df, ISDH_df)
+df <- separate(data=df, col = coords, into = c("lon", "lat"), sep = "\\,")
+df$lon <- as.numeric(as.character(df$lon))
+df$lat <- as.numeric(as.character(df$lat))
+```
+
+### Modified from https://axelhodler.medium.com/creating-a-heat-map-from-coordinates-using-r-780db4901075
+```{r chunk6}
+library(ggplot2)
+library(ggmap)
+library(RColorBrewer)
+map_bounds <- c(left = -95, bottom = 35, right = -80.00, top = 45)
+od_coords.map <- get_stamenmap(map_bounds, zoom = 8, maptype = "toner-lite")
+od_coords.map <- ggmap(od_coords.map, extent="device", legend="none")
+od_coords.map <- od_coords.map + stat_density2d(data=df, aes(x=lat, y=lon, fill=..level.., alpha=..level..), geom="polygon")
+od_coords.map <- od_coords.map + scale_fill_gradientn(colours=rev(brewer.pal(7, "Spectral")))
+od_coords.map <- od_coords.map + theme_bw()
+plot(od_coords.map)
+```
+
+# First Responder and ISDH Naloxone Incident Reports (discretized heatmap)
+
+### Code modified from http://rstudio-pubs-static.s3.amazonaws.com/140202_529bec3c57004e3da55f3df889b59c62.html
+```{r chunk7}
+library(readxl)
+library(dplyr)
+library(choroplethr)
+library(choroplethrMaps)
+library(ggplot2)
+library(plotly)
+library(plyr)
+data(county.regions)
+
+FR_data<-read_excel("/Users/sam/Documents/Temp School/BMEG 372/Group Work/chopped data/01-Formstack Incident Reports/First_Responder_Reporting_2016-2020_Formstack.xlsx")
+FR_data<-FR_data[,c(5,8)]
+FR_data$County <- tolower(FR_data$County)
+FRregioncodes <- left_join(FR_data, county.regions, by = c("County" = "county.name"))
+FR_df <- data.frame((as.character(FRregioncodes$region)), as.numeric(FRregioncodes$`Number instances naloxone used`))
+colnames(FR_df) <- c("region", "value")
+
+ISDH_data<-read_excel("/Users/sam/Documents/Temp School/BMEG 372/Group Work/chopped data/01-Formstack Incident Reports/ISDH_FirstResponde_Grant_Reporting_Formstack.xlsx")
+ISDH_data<-ISDH_data[,c(5,8)]
+data(county.regions)
+county.regions <- filter(county.regions, state.name == "indiana")
+ISDH_data$County <- tolower(ISDH_data$County)
+regioncodes <- left_join(ISDH_data, county.regions, by = c("County" = "county.name"))
+ISDH_df <- data.frame((as.character(regioncodes$region)), as.numeric(regioncodes$`Number instances naloxone used`))
+colnames(ISDH_df) <- c("region", "value")
+
+df <- rbind(FR_df, ISDH_df)
+
+colnames(df) <- c("region", "value")
+library(plyr)
+df <- ddply(df,"region",numcolwise(sum))
+df <- data.frame((as.numeric(df$region)), as.numeric(df$value))
+colnames(df) <- c("region", "value")
+county_map <- county_choropleth(df, title ="Number of incidentsof naloxone usage in Indiana between 2018 and 2021",num_colors = 5,state_zoom = "indiana")
+county_map
+```
