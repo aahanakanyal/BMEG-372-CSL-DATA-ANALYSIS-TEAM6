@@ -13,4 +13,9 @@ The Analysis was divided into 3 key categories:
  
     Areas of concern were highlighted manually as shown in the report
 
-2. 
+2. corrplot and random forrest - contains r code used for generating PC data and for classifying the data.
+   * random forrest classifier.R - produces all the plots and data seen in the folder. change "file location" seen on lines 1, 70, and 96 to a file name on your computer and remove the # at the start of those lines to obtain the outputs
+   * table 1.csv - the classification data for the first responders by counties
+   * table 2.csv - the classificaiton data for the first responders by type
+   * county prediction.xlsx - used to calculate percent accuracy for the classification of all the counties
+   * most of the images were generated using earlier iterations of the code. corr~0.5.png and corr~1.png are examples of what the correlations in corrplot.png.png look like. Rplot.png is the same as corrplot.png, but with coloured numbers instead of coloured circles.
