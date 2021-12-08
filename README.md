@@ -9,6 +9,7 @@ The Analysis was divided into 3 key categories:
    *  deathsincounty.R produces Overdose Deaths Heatmaps (Data Obtained from [Indiana State Department of Health](https://www.in.gov/health/overdose-prevention/data/indiana/))
    * KitDist.R produces Heatmaps of naloxone kits distributed to first reposnders using wordpress forms
    * FirstResponderData.R produces heatmaps of number of instances naloxone was administered to individuals in counties using Formstack Incident Reports. 
+   * Microsoft Excel was used for Line graphs in the report using layperson data
  
     Areas of concern were highlighted manually as shown in the report
 
