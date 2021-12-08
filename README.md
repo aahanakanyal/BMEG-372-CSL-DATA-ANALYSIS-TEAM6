@@ -13,7 +13,7 @@ The Analysis was divided into 3 key categories:
  
     Areas of concern were highlighted manually as shown in the report
 
-2. corrplot and random forrest - contains r code used for generating PC data and for classifying the data.
+2. corrplot and random forrest - contains r code used for generating PC data and for classifying the first responder data.
    * random forrest classifier.R - produces all the plots and data seen in the folder. change "file location" seen on lines 1, 70, and 96 to a file name on your computer and remove the # at the start of those lines to obtain the outputs
    * table 1.csv - the classification data for the first responders by counties
    * table 2.csv - the classificaiton data for the first responders by type
