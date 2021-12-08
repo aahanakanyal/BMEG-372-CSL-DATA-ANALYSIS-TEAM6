@@ -18,4 +18,4 @@ The Analysis was divided into 3 key categories:
    * table 1.csv - the classification data for the first responders by counties
    * table 2.csv - the classificaiton data for the first responders by type
    * county prediction.xlsx - used to calculate percent accuracy for the classification of all the counties
-   * most of the images were generated using earlier iterations of the code. corr~0.5.png and corr~1.png are examples of what the correlations in corrplot.png.png look like. Rplot.png is the same as corrplot.png, but with coloured numbers instead of coloured circles.
+   * most of the images were generated using earlier iterations of the code. `corr~0.5.png` and `corr~1.png` are examples of what the correlations in `corrplot.png` look like. `Rplot.png` is the same as `corrplot.png`, but with coloured numbers instead of coloured circles.
