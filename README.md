@@ -4,7 +4,8 @@ All files were obtained from the drive [BMEG 372 2021W Overdose Lifeline](https:
 
 The Analysis was divided into 3 key categories: 
 
-1. First Responder data for instances of naloxne use , Overdose deaths and Kits Distribution --> folder County_Heat_Maps
+1. First Responder data for instances of naloxne use , Overdose deaths and Kits Distribution --> folder County_Heat_Maps  
+   (Code adapted from [here](http://rstudio-pubs-static.s3.amazonaws.com/140202_529bec3c57004e3da55f3df889b59c62.html))
    *  deathsincounty.R produces Overdose Deaths Heatmaps (Data Obtained from [Indiana State Department of Health](https://www.in.gov/health/overdose-prevention/data/indiana/))
    * KitDist.R produces Heatmaps of naloxone kits distributed to first reposnders using wordpress forms
    * FirstResponderData.R produces heatmaps of number of instances naloxone was administered to individuals in counties using Formstack Incident Reports. 
