@@ -6,13 +6,12 @@ The Analysis was divided into 3 key categories:
 
 1. First Responder data for instances of naloxne use , Overdose deaths and Kits Distribution --> folder County_Heat_Maps  
    (Code adapted from [here](http://rstudio-pubs-static.s3.amazonaws.com/140202_529bec3c57004e3da55f3df889b59c62.html))
-   *  `deathsincounty.R` produces Overdose Deaths Heatmaps (Data Obtained from [Indiana State Department of Health](https://www.in.gov/health/overdose-prevention/data/indiana/))
-   * `KitDist.R` produces Heatmaps of naloxone kits distributed to first reposnders using wordpress forms
-   * `FirstResponderData.R` produces heatmaps of number of instances naloxone was administered to individuals in counties using Formstack Incident Reports. 
-   * `Microsoft Excel` was used for Line graphs in the report using layperson data
-   * Produced heatmaps are located in file `heatmap analysis`
+   *  `deathsincounty.R` produces Overdose Deaths Heatmaps (Data Obtained from [Indiana State Department of Health](https://www.in.gov/health/overdose-prevention/data/indiana/)) shown in` NumberofODDeaths_5years_withcounty.png`
+   * `KitDist.R` produces Heatmaps of naloxone kits distributed to first reposnders using wordpress forms shown in `KitsRequested_withcounty.png`
+   * `FirstResponderData.R` produces heatmaps of number of instances naloxone was administered to individuals in counties using Formstack Incident Reports as shown       in` Instances_naloxone_use.png`
+   * `Microsoft Excel` was used for Line graphs in the report using layperson data shown in `lay_county_naloxone` and `Monroe_Vanderburgh`
  
-    Areas of concern were highlighted manually as shown in the report
+    Areas of concern were highlighted manually in red and labelled with county names in `preview` software
 
 2. corrplot and random forrest - contains r code used for generating PC data and for classifying the first responder data.
    * random forrest classifier.R - produces all the plots and data seen in the folder. change "file location" seen on lines 1, 70, and 96 to a file name on your computer and remove the # at the start of those lines to obtain the outputs
