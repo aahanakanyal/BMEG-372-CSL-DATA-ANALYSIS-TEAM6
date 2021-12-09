@@ -6,10 +6,11 @@ The Analysis was divided into 3 key categories:
 
 1. First Responder data for instances of naloxne use , Overdose deaths and Kits Distribution --> folder County_Heat_Maps  
    (Code adapted from [here](http://rstudio-pubs-static.s3.amazonaws.com/140202_529bec3c57004e3da55f3df889b59c62.html))
-   *  deathsincounty.R produces Overdose Deaths Heatmaps (Data Obtained from [Indiana State Department of Health](https://www.in.gov/health/overdose-prevention/data/indiana/))
-   * KitDist.R produces Heatmaps of naloxone kits distributed to first reposnders using wordpress forms
-   * FirstResponderData.R produces heatmaps of number of instances naloxone was administered to individuals in counties using Formstack Incident Reports. 
-   * Microsoft Excel was used for Line graphs in the report using layperson data
+   *  `deathsincounty.R` produces Overdose Deaths Heatmaps (Data Obtained from [Indiana State Department of Health](https://www.in.gov/health/overdose-prevention/data/indiana/))
+   * `KitDist.R` produces Heatmaps of naloxone kits distributed to first reposnders using wordpress forms
+   * `FirstResponderData.R` produces heatmaps of number of instances naloxone was administered to individuals in counties using Formstack Incident Reports. 
+   * `Microsoft Excel` was used for Line graphs in the report using layperson data
+   * Produced heatmaps are located in file `heatmap analysis`
  
     Areas of concern were highlighted manually as shown in the report
 
@@ -19,3 +20,8 @@ The Analysis was divided into 3 key categories:
    * table 2.csv - the classificaiton data for the first responders by type
    * county prediction.xlsx - used to calculate percent accuracy for the classification of all the counties
    * most of the images were generated using earlier iterations of the code. `corr~0.5.png` and `corr~1.png` are examples of what the correlations in `corrplot.png` look like. `Rplot.png` is the same as `corrplot.png`, but with coloured numbers instead of coloured circles.
+
+3. The continuous heat maps were produced using the `Analysis.Rmd` file in the folder `more heat maps` 
+   * `Analysis.pdf` gives a brief outline on how the code was used to produce `continuous distribution heatmap.png` and `continuous incidents heatmap.png`
+   * `discrete heatmap w: overlay.png` and `discrete heatmap.png` were produced by a combination of code from part `1` and `Analysis.Rmd`
+   
